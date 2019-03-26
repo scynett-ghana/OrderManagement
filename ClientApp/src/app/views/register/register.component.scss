@@ -1,0 +1,65 @@
+.bg-primary {
+  background-color: #43576e !important;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #a9aaa9;
+  border-color: #a9aaa9;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #43576e;
+  border-color: #43576e;
+}
+
+.btn-primary,
+.btn-success:hover {
+  color: #fff;
+  background-color: #43576ecf;
+  border-color: #43576ecf;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle:hover {
+  color: #fff;
+  background-color: #969696;
+  border-color: #969696;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #43576e;
+  border-color: #43576e;
+}
+
+.btn-success:not(:disabled):not(.disabled):active,
+.btn-success:not(:disabled):not(.disabled).active,
+.show > .btn-success.dropdown-toggle {
+  color: #fff;
+  background-color: #43576e;
+  border-color: #43576e;
+}
+
+.btn-primary[_ngcontent-c0]:not(:disabled):not(.disabled):active,
+.btn-primary[_ngcontent-c0]:not(:disabled):not(.disabled).active,
+.show[_ngcontent-c0] > .btn-primary.dropdown-toggle[_ngcontent-c0]:hover {
+  color: #fff;
+  background-color: #a9aaa9;
+  border-color: #a9aaa9;
+}
+
+.btn-success:focus,
+.btn-success.focus {
+  box-shadow: none;
+}
+
+.btn-success:not(:disabled):not(.disabled):active:focus,
+.btn-success:not(:disabled):not(.disabled).active:focus,
+.show > .btn-success.dropdown-toggle:focus {
+  box-shadow: none;
+}
