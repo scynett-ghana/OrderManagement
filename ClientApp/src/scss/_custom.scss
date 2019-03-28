@@ -880,6 +880,7 @@ body.m-portlet--fullscreen.m-aside-left--fixed .m-aside-left {
 }
 .m-portlet .m-portlet__body {
   color: #575962;
+  overflow-x: auto;
 }
 .m-portlet .m-portlet__foot:not(.m-portlet__no-border) {
   border-top: 1px solid #ebedf2;

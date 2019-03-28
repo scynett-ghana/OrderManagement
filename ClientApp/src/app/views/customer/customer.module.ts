@@ -16,11 +16,14 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatMenuModule,
-  MatTabsModule
+  MatTabsModule,
+  MatDialogModule
 } from '@angular/material';
 import { CustomerDetailsOpenInvoiceComponent } from './customer-details/customer-details-open-invoice/customer-details-open-invoice.component';
 import { CustomerDetailsClosedInvoicesComponent } from './customer-details/customer-details-closed-invoices/customer-details-closed-invoices.component';
 import { CustomerDetailsCustomerDetailsComponent } from './customer-details/customer-details-customer-details/customer-details-customer-details.component';
+import { OpenInvoiceDialogComponent } from './customer-details/customer-details-open-invoice/open-invoices-details.component';
+import { ClosedInvoiceDialogComponent } from './customer-details/customer-details-closed-invoices/closed-invoices-details.component';
 
 const customerRoute: Routes = [
   {
@@ -52,7 +55,9 @@ const customerRoute: Routes = [
     CustomerListComponent,
     CustomerDetailsOpenInvoiceComponent,
     CustomerDetailsClosedInvoicesComponent,
-    CustomerDetailsCustomerDetailsComponent
+    CustomerDetailsCustomerDetailsComponent,
+    OpenInvoiceDialogComponent,
+    ClosedInvoiceDialogComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +72,9 @@ const customerRoute: Routes = [
     MatPaginatorModule,
     MatSortModule,
     MatMenuModule,
-    MatTabsModule
-  ]
+    MatTabsModule,
+    MatDialogModule
+  ],
+  entryComponents: [OpenInvoiceDialogComponent, ClosedInvoiceDialogComponent]
 })
 export class CustomerModule {}

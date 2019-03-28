@@ -1,6 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import {
+  MatTableDataSource,
+  MatPaginator,
+  MatSort,
+  MatDialog
+} from '@angular/material';
 import { Router } from '@angular/router';
+import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
 
 export interface UserData {
   customerId: number;
@@ -73,7 +79,7 @@ export class CustomerListComponent implements OnInit {
     }
   ];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.customerLists);
   }
 
@@ -98,5 +104,13 @@ export class CustomerListComponent implements OnInit {
     }
   }
 
-  customerDeleteDetails() {}
+  customerDeleteDetails(): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }

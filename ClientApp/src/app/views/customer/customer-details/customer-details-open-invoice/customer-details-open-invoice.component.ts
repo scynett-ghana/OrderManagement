@@ -1,14 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import {
+  MatPaginator,
+  MatSort,
+  MatTableDataSource,
+  MatDialog,
+  MatDialogRef
+} from '@angular/material';
 import { Router } from '@angular/router';
+import { OpenInvoiceDialogComponent } from './open-invoices-details.component';
 
 export interface CustomerOpenInvoice {
-  productName: string;
-  pricePerKilo: string;
-  quantity: string;
-  kilosNeeded: string;
-  subTotal: string;
-  amount: string;
+  invoiceID: string;
+  purchaseDate: string;
+  totalAmount: string;
+  amountPaid: string;
+  status: string;
 }
 
 @Component({
@@ -17,13 +23,13 @@ export interface CustomerOpenInvoice {
   styleUrls: ['./customer-details-open-invoice.component.scss']
 })
 export class CustomerDetailsOpenInvoiceComponent implements OnInit {
+  openInvoiceDialogBox: MatDialogRef<OpenInvoiceDialogComponent>;
   displayedColumns: string[] = [
-    'productName',
-    'pricePerKilo',
-    'quantity',
-    'kilosNeeded',
-    'subTotal',
-    'amount'
+    'invoiceID',
+    'purchaseDate',
+    'totalAmount',
+    'amountPaid',
+    'status'
   ];
   dataSource: MatTableDataSource<CustomerOpenInvoice>;
 
@@ -32,48 +38,50 @@ export class CustomerDetailsOpenInvoiceComponent implements OnInit {
 
   customerOpenInvoices: CustomerOpenInvoice[] = [
     {
-      productName: 'Mango',
-      pricePerKilo: '23',
-      quantity: '60',
-      kilosNeeded: '100',
-      subTotal: '300',
-      amount: '700'
+      invoiceID: '1',
+      purchaseDate: '23',
+      totalAmount: '60',
+      amountPaid: '100',
+      status: '300'
     },
     {
-      productName: 'Pineapple',
-      pricePerKilo: '23',
-      quantity: '60',
-      kilosNeeded: '100',
-      subTotal: '300',
-      amount: '700'
+      invoiceID: '2',
+      purchaseDate: '23',
+      totalAmount: '60',
+      amountPaid: '100',
+      status: '300'
     },
     {
-      productName: 'Water',
-      pricePerKilo: '23',
-      quantity: '60',
-      kilosNeeded: '100',
-      subTotal: '300',
-      amount: '700'
+      invoiceID: '3',
+      purchaseDate: '23',
+      totalAmount: '60',
+      amountPaid: '100',
+      status: '300'
     },
     {
-      productName: 'Pawpaw',
-      pricePerKilo: '23',
-      quantity: '60',
-      kilosNeeded: '100',
-      subTotal: '300',
-      amount: '700'
+      invoiceID: '4',
+      purchaseDate: '23',
+      totalAmount: '60',
+      amountPaid: '100',
+      status: '300'
     },
     {
-      productName: 'Orange',
-      pricePerKilo: '23',
-      quantity: '60',
-      kilosNeeded: '100',
-      subTotal: '300',
-      amount: '700'
+      invoiceID: '5',
+      purchaseDate: '23',
+      totalAmount: '60',
+      amountPaid: '100',
+      status: '300'
+    },
+    {
+      invoiceID: '6',
+      purchaseDate: '23',
+      totalAmount: '60',
+      amountPaid: '100',
+      status: '300'
     }
   ];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.customerOpenInvoices);
   }
 
@@ -96,6 +104,12 @@ export class CustomerDetailsOpenInvoiceComponent implements OnInit {
     } else {
       this.router.navigate(['/customer/form', customerId]);
     }
+  }
+
+  openInvoiceDialog() {
+    this.openInvoiceDialogBox = this.dialog.open(OpenInvoiceDialogComponent, {
+      width: '800px'
+    });
   }
 
   customerDeleteDetails() {}

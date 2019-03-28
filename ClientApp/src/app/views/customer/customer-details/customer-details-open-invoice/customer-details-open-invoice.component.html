@@ -1,14 +1,6 @@
-<div class="pt-2">
+<div>
   <div class="m-portlet">
     <div class="m-portlet__body">
-      <mat-form-field>
-        <input
-          matInput
-          (keyup)="applyFilter($event.target.value)"
-          placeholder="Filter"
-        />
-      </mat-form-field>
-
       <div>
         <table
           mat-table
@@ -17,88 +9,67 @@
           class="customerListTable"
         >
           <!-- ID Column -->
-          <ng-container matColumnDef="productName">
+          <ng-container matColumnDef="invoiceID">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>
-              Product Name
+              Invoice ID
             </th>
             <td mat-cell *matCellDef="let customerOpenInvoices">
-              {{ customerOpenInvoices.productName }}
+              {{ customerOpenInvoices.invoiceID }}
             </td>
             <td mat-footer-cell *matFooterCellDef>&nbsp;</td>
           </ng-container>
 
           <!-- Progress Column -->
-          <ng-container matColumnDef="pricePerKilo">
+          <ng-container matColumnDef="purchaseDate">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>
-              Price Per Kilo
+              Purchase Date
             </th>
             <td mat-cell *matCellDef="let customerOpenInvoices">
-              {{ customerOpenInvoices.pricePerKilo }}
+              {{ customerOpenInvoices.purchaseDate }}
             </td>
             <td mat-footer-cell *matFooterCellDef>&nbsp;</td>
           </ng-container>
 
           <!-- Name Column -->
-          <ng-container matColumnDef="quantity">
+          <ng-container matColumnDef="totalAmount">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>
-              Quantity
+              Total Amount
             </th>
             <td mat-cell *matCellDef="let customerOpenInvoices">
-              {{ customerOpenInvoices.quantity }}
+              {{ customerOpenInvoices.totalAmount }}
             </td>
             <td mat-footer-cell *matFooterCellDef>&nbsp;</td>
           </ng-container>
 
           <!-- Color Column -->
-          <ng-container matColumnDef="kilosNeeded">
+          <ng-container matColumnDef="amountPaid">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>
-              Kilos Needed
+              Amount Paid
             </th>
             <td mat-cell *matCellDef="let customerOpenInvoices">
-              {{ customerOpenInvoices.kilosNeeded }}
+              {{ customerOpenInvoices.amountPaid }}
             </td>
             <td mat-footer-cell *matFooterCellDef>&nbsp;</td>
           </ng-container>
 
           <!-- Color Column -->
-          <ng-container matColumnDef="subTotal">
+          <ng-container matColumnDef="status">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>
-              Sub Total
+              Status
             </th>
             <td mat-cell *matCellDef="let customerOpenInvoices">
-              {{ customerOpenInvoices.subTotal }}
-            </td>
-            <td mat-footer-cell *matFooterCellDef>&nbsp;</td>
-          </ng-container>
-
-          <!-- Color Column -->
-          <ng-container matColumnDef="amount">
-            <th mat-header-cell *matHeaderCellDef>Amount</th>
-            <td mat-cell *matCellDef="let customerOpenInvoices">
-              <!-- {{ customerLists.phone }} -->
-              <button mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item>
-                  <mat-icon>visibility</mat-icon>
-                  <span>View Details</span>
-                </button>
-                <button mat-menu-item>
-                  <mat-icon>edit</mat-icon>
-                  <span>Edit Details</span>
-                </button>
-                <button mat-menu-item>
-                  <mat-icon>delete</mat-icon>
-                  <span>Delete Customer</span>
-                </button>
-              </mat-menu>
+              {{ customerOpenInvoices.status }}
             </td>
             <td mat-footer-cell *matFooterCellDef>&nbsp;</td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            (click)="openInvoiceDialog()"
+            class="OpenCloseInvoiceTable"
+          ></tr>
         </table>
 
         <mat-paginator
