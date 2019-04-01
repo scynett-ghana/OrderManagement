@@ -46,15 +46,19 @@ export const navItems: NavData[] = [
     url: '/customer',
     icon: 'icon-calculator'
   },
-
-  {
-    name: 'Order',
-    url: '/customer',
-    icon: 'icon-calculator'
-  },
   {
     name: 'Product',
     url: '/products',
+    icon: 'icon-calculator'
+  },
+  {
+    name: 'Invoice',
+    url: '/invoice',
+    icon: 'icon-calculator'
+  },
+  {
+    name: 'Logout',
+    url: '/login',
     icon: 'icon-calculator'
   }
 

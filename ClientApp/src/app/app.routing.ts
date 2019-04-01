@@ -61,6 +61,10 @@ export const routes: Routes = [
       {
         path: 'products',
         loadChildren: './views/products/products.module#ProductsModule'
+      },
+      {
+        path: 'invoice',
+        loadChildren: './views/invoice/invoice.module#InvoiceModule'
       }
     ]
   },
