@@ -1,0 +1,182 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="m-portlet">
+      <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+          <div class="m-portlet__head-title">
+            <h3 class="m-portlet__head-text">
+              Add Invoice
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="m-portlet__body pb-0">
+        <div class="col-md-8">
+          <div class="form-group row">
+            <div class="col-md-6">
+              <mat-form-field appearance="outline">
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  placeholder="Choose a date"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Order Number</mat-label>
+                <input matInput placeholder="" />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Select Customer</mat-label>
+                <mat-select>
+                  <mat-option
+                    *ngFor="let customer of customerDetails"
+                    [value]="customer.customerId"
+                  >
+                    {{ customer.customerName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Select Product</mat-label>
+                <mat-select>
+                  <mat-option
+                    *ngFor="let products of productDetails"
+                    [value]="products.productId"
+                  >
+                    {{ products.productName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Price Per Kilo</mat-label>
+                <input matInput placeholder="" />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Quantity</mat-label>
+                <input matInput type="number" placeholder="" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>SubTotal</mat-label>
+                <input matInput placeholder="" />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Kilos Needed</mat-label>
+                <input matInput placeholder="" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Amount</mat-label>
+                <input matInput placeholder="" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="m-portlet__foot">
+        <button mat-raised-button color="primary">Add</button>
+      </div>
+
+      <hr />
+
+      <div class="m-portlet__body pt-2">
+        <div class="col-md-8">
+          <table mat-table [dataSource]="dataSource" class="invoiceTable">
+            <ng-container matColumnDef="productName">
+              <th mat-header-cell *matHeaderCellDef>Product Name</th>
+              <td mat-cell *matCellDef="let invoiceDetails">
+                {{ invoiceDetails.productName }}
+              </td>
+              <td mat-footer-cell *matFooterCellDef>Total</td>
+            </ng-container>
+
+            <ng-container matColumnDef="pricePerKilo">
+              <th mat-header-cell *matHeaderCellDef>Price Per Kilo</th>
+              <td mat-cell *matCellDef="let invoiceDetails">
+                {{ invoiceDetails.pricePerKilo }}
+              </td>
+              <td mat-footer-cell *matFooterCellDef>Total</td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef>Quantity</th>
+              <td mat-cell *matCellDef="let invoiceDetails">
+                {{ invoiceDetails.quantity }}
+              </td>
+              <td mat-footer-cell *matFooterCellDef>Total</td>
+            </ng-container>
+
+            <ng-container matColumnDef="kilosNeeded">
+              <th mat-header-cell *matHeaderCellDef>Kilos Needed</th>
+              <td mat-cell *matCellDef="let invoiceDetails">
+                {{ invoiceDetails.kilosNeeded }}
+              </td>
+              <td mat-footer-cell *matFooterCellDef>Total</td>
+            </ng-container>
+
+            <ng-container matColumnDef="subTotal">
+              <th mat-header-cell *matHeaderCellDef>Sub Total</th>
+              <td mat-cell *matCellDef="let invoiceDetails">
+                {{ invoiceDetails.subTotal }}
+              </td>
+              <td mat-footer-cell *matFooterCellDef>Total</td>
+            </ng-container>
+
+            <!-- Cost Column -->
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell *matHeaderCellDef>Amount</th>
+              <td mat-cell *matCellDef="let invoiceDetails">
+                {{ invoiceDetails.amount }}
+              </td>
+              <td mat-footer-cell *matFooterCellDef>
+                GHC {{ getTotalCost() | currency }}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+          </table>
+        </div>
+        <div class="m-portlet__foot">
+          <button mat-raised-button color="primary">Save</button>
+          <button
+            mat-raised-button
+            color="warn"
+            [routerLink]="['/invoice/list']"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

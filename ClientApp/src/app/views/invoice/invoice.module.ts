@@ -14,9 +14,15 @@ import {
   MatSortModule,
   MatMenuModule,
   MatTabsModule,
-  MatDialogModule
+  MatDialogModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatChipsModule
 } from '@angular/material';
 import { PrintInvoiceComponent } from './invoice/print-invoice/print-invoice.component';
+import { InvoiceFormComponent } from './invoice/invoice-form/invoice-form.component';
+import { InvoiceDetailsComponent } from './invoice/invoice-details/invoice-details.component';
+import { InvoicePaymentComponent } from './invoice/invoice-payment/invoice-payment.component';
 
 const invoiceRoute: Routes = [
   {
@@ -30,11 +36,33 @@ const invoiceRoute: Routes = [
   {
     path: 'print/:id',
     component: PrintInvoiceComponent
+  },
+  {
+    path: 'form',
+    component: InvoiceFormComponent
+  },
+  {
+    path: 'form/:id',
+    component: InvoiceFormComponent
+  },
+  {
+    path: 'details/:id',
+    component: InvoiceDetailsComponent
+  },
+  {
+    path: 'payment/:id',
+    component: InvoicePaymentComponent
   }
 ];
 
 @NgModule({
-  declarations: [InvoiceComponent, PrintInvoiceComponent],
+  declarations: [
+    InvoiceComponent,
+    PrintInvoiceComponent,
+    InvoiceFormComponent,
+    InvoiceDetailsComponent,
+    InvoicePaymentComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(invoiceRoute),
@@ -49,7 +77,10 @@ const invoiceRoute: Routes = [
     MatSortModule,
     MatMenuModule,
     MatTabsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatChipsModule
   ]
 })
 export class InvoiceModule {}

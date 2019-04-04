@@ -1,3 +1,4 @@
+import { ConfirmationDialogComponent } from './../../shared/confirmation-dialog/confirmation-dialog.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   MatTableDataSource,
@@ -46,7 +47,7 @@ export class InvoiceComponent implements OnInit {
       purchaseDate: '12-12-2019',
       totalAmount: '2500',
       amountPaid: '2000',
-      status: 'Open',
+      status: 'Opened',
       referenceNumber: '224'
     },
     {
@@ -55,7 +56,7 @@ export class InvoiceComponent implements OnInit {
       purchaseDate: '12-12-2020',
       totalAmount: '2509',
       amountPaid: '2008',
-      status: 'Open',
+      status: 'Opened',
       referenceNumber: '225'
     }
   ];
@@ -77,5 +78,25 @@ export class InvoiceComponent implements OnInit {
     }
   }
 
-  addInvoice() {}
+  viewInvoice(invoiceId: number) {
+    this.router.navigate(['/invoice/details/' + invoiceId]);
+  }
+
+  payInvoice(invoiceId: number) {
+    this.router.navigate(['/invoice/payment/' + invoiceId]);
+  }
+
+  editInvoice(invoiceId: number) {
+    this.router.navigate(['/invoice/form/' + invoiceId]);
+  }
+
+  deleteInvoice(invoiceId: number): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }

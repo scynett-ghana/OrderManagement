@@ -38,13 +38,13 @@ export const navItems: NavData[] = [
 
   {
     title: true,
-    name: 'Components'
+    name: 'Sections'
   },
 
   {
     name: 'Customer',
     url: '/customer',
-    icon: 'icon-calculator'
+    icon: 'icon-user'
   },
   {
     name: 'Product',
@@ -57,21 +57,25 @@ export const navItems: NavData[] = [
     icon: 'icon-calculator'
   },
   {
+    name: 'Admin',
+    url: '/base',
+    icon: 'icon-puzzle',
+    children: [
+      {
+        name: 'Company Details',
+        url: '/base/cards',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Taxes',
+        url: '/base/cards',
+        icon: 'icon-puzzle'
+      }
+    ]
+  },
+  {
     name: 'Logout',
     url: '/login',
     icon: 'icon-calculator'
   }
-
-  // {
-  //   name: 'Base',
-  //   url: '/base',
-  //   icon: 'icon-puzzle',
-  //   children: [
-  //     {
-  //       name: 'Cards',
-  //       url: '/base/cards',
-  //       icon: 'icon-puzzle'
-  //     }
-  //   ]
-  // }
 ];

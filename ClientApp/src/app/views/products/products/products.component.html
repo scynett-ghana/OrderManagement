@@ -9,16 +9,29 @@
             </h3>
           </div>
         </div>
-        <button
-          mat-raised-button
-          color="primary"
-          class="actions"
-          (click)="addProduct()"
-        >
-          <mat-icon aria-hidden="false">add_circle</mat-icon>&nbsp; Add Product
-        </button>
       </div>
       <div class="m-portlet__body pb-0">
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Product Name</mat-label>
+              <input matInput placeholder="" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Price Per Kilo</mat-label>
+              <input matInput placeholder="" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-2">
+            <button class="mt-2 pt-1 pb-1" mat-raised-button color="primary">
+              <mat-icon aria-hidden="false">add_circle</mat-icon>&nbsp; Add New
+              Product
+            </button>
+          </div>
+        </div>
+
         <mat-form-field>
           <input
             matInput

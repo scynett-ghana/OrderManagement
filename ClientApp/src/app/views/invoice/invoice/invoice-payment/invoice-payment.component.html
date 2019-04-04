@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="m-portlet">
+      <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+          <div class="m-portlet__head-title">
+            <h3 class="m-portlet__head-text">
+              Make Payment
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="m-portlet__body pb-0">
+        <div class="col-md-12">
+          <h6 class="font-weight-bold">Invoice Details</h6>
+          <hr />
+        </div>
+        <div class=" row col-md-12 pb-3">
+          <div class="col-md-2 ">Invoice Number</div>
+          <div class="col-md-2 font-weight-bold">#22442</div>
+        </div>
+        <div class=" row col-md-12 pb-3">
+          <div class="col-md-2">Total Amount</div>
+          <div class="col-md-2 font-weight-bold">7000</div>
+        </div>
+        <div class="row col-md-12 pb-3">
+          <div class="col-md-2">Amount Paid</div>
+          <div class="col-md-2 font-weight-bold">6000</div>
+        </div>
+        <div class="row col-md-12 pb-3">
+          <div class="col-md-2">Invoice Status</div>
+          <div class="col-md-2 font-weight-bold">Open</div>
+        </div>
+        <div class="row col-md-12 pb-3">
+          <div class="col-md-2">Reference Number</div>
+          <div class="col-md-2 font-weight-bold">K-0000001</div>
+        </div>
+
+        <hr />
+
+        <div class="col-md-8">
+          <div class="form-group row">
+            <div class="col-md-8">
+              <mat-form-field appearance="outline">
+                <mat-label>Amount Paying</mat-label>
+                <input matInput placeholder="" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 pt-2">
+              <button mat-raised-button color="primary" class="pt-1 pb-1">
+                Save Details
+              </button>
+              <button
+                mat-raised-button
+                color="warn"
+                class="pt-1 pb-1"
+                [routerLink]="['/invoice/list']"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

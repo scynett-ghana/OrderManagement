@@ -13,7 +13,7 @@
           mat-raised-button
           color="primary"
           class="actions"
-          (click)="addInvoice()"
+          [routerLink]="['/invoice/form']"
         >
           <mat-icon aria-hidden="false">add_circle</mat-icon>&nbsp; Add Invoice
         </button>
@@ -92,7 +92,11 @@
                 Status
               </th>
               <td mat-cell *matCellDef="let productInvoices">
-                {{ productInvoices.status }}
+                <mat-chip-list aria-label="Fish selection">
+                  <mat-chip color="primary" selected>{{
+                    productInvoices.status
+                  }}</mat-chip>
+                </mat-chip-list>
               </td>
               <td mat-footer-cell *matFooterCellDef>&nbsp;</td>
             </ng-container>
@@ -120,19 +124,31 @@
                     <mat-icon>print</mat-icon>
                     <span>Print Invoice</span>
                   </button>
-                  <button mat-menu-item>
+                  <button
+                    mat-menu-item
+                    (click)="viewInvoice(productInvoices.invoiceId)"
+                  >
                     <mat-icon>visibility</mat-icon>
                     <span>View Invoice</span>
                   </button>
-                  <button mat-menu-item>
+                  <button
+                    mat-menu-item
+                    (click)="editInvoice(productInvoices.invoiceId)"
+                  >
                     <mat-icon>edit</mat-icon>
                     <span>Edit Invoice</span>
                   </button>
-                  <button mat-menu-item>
+                  <button
+                    mat-menu-item
+                    (click)="payInvoice(productInvoices.invoiceId)"
+                  >
                     <mat-icon>money</mat-icon>
                     <span>Pay Invoice </span>
                   </button>
-                  <button mat-menu-item>
+                  <button
+                    mat-menu-item
+                    (click)="deleteInvoice(productInvoices.invoiceId)"
+                  >
                     <mat-icon>delete</mat-icon>
                     <span>Delete Invoice</span>
                   </button>
