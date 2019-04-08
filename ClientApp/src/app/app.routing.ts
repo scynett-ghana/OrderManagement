@@ -65,6 +65,10 @@ export const routes: Routes = [
       {
         path: 'invoice',
         loadChildren: './views/invoice/invoice.module#InvoiceModule'
+      },
+      {
+        path: 'admin',
+        loadChildren: './views/admin/admin.module#AdminModule'
       }
     ]
   },

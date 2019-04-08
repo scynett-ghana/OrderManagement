@@ -1,3 +1,6 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { CustomerService } from './customer.service';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CommonModule } from '@angular/common';
@@ -63,6 +66,9 @@ const customerRoute: Routes = [
     CommonModule,
     RouterModule.forChild(customerRoute),
     MatCardModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -75,6 +81,7 @@ const customerRoute: Routes = [
     MatTabsModule,
     MatDialogModule
   ],
+  providers: [CustomerService],
   entryComponents: [OpenInvoiceDialogComponent, ClosedInvoiceDialogComponent]
 })
 export class CustomerModule {}

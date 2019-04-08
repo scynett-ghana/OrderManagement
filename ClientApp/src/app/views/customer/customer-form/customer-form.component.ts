@@ -1,5 +1,8 @@
+import { CustomerService } from './../customer.service';
+import { Customer } from './../customer.model';
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Form, FormBuilder, FormGroup } from '@angular/forms';
+
 import {
   trigger,
   animate,
@@ -34,6 +37,8 @@ export interface AddedProducts {
   styleUrls: ['./customer-form.component.scss']
 })
 export class CustomerFormComponent implements OnInit {
+  customer = new Customer();
+  customerForm: FormGroup;
   showCustomPrice = false;
   defaultParameter = '';
   showInvoice = false;
@@ -100,6 +105,23 @@ export class CustomerFormComponent implements OnInit {
     'Sunday'
   ];
 
+  createCustomerForm() {
+    this.customerForm = this.formBuilder.group({
+      companyName: [this.customer.companyName],
+      number: [this.customer.id],
+      firstName: [this.customer.firstName],
+      lastName: [this.customer.lastName],
+      email: [this.customer.email],
+      phone: [this.customer.phone],
+      town: [this.customer.town],
+      street: [this.customer.street],
+      country: [this.customer.country],
+      zip: [this.customer.zip],
+      tours: [this.customer.tourDays],
+      comment: [this.customer.comment]
+    });
+  }
+
   customPriceToggle() {
     this.showCustomPrice = !this.showCustomPrice;
   }
@@ -115,12 +137,26 @@ export class CustomerFormComponent implements OnInit {
       .reduce((acc, value) => acc + value, 0);
   }
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private customerService: CustomerService
+  ) {}
 
   ngOnInit() {
+    this.createCustomerForm();
     this.activatedRoute.paramMap.subscribe(params => {
       this.defaultParameter = params.get('id');
       console.log(this.defaultParameter);
     });
+  }
+
+  onSubmit() {
+    this.customerService
+      .createCustomer(this.customerForm.value)
+      .subscribe((result: any) => {
+        console.log('success');
+      });
   }
 }
