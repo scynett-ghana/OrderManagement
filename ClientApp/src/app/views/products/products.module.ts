@@ -16,7 +16,7 @@ import {
   MatTabsModule,
   MatDialogModule
 } from '@angular/material';
-import { AddProductDialogComponent } from './products/add-products-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const productsRoute: Routes = [
   {
@@ -30,12 +30,13 @@ const productsRoute: Routes = [
 ];
 
 @NgModule({
-  declarations: [ProductsComponent, AddProductDialogComponent],
+  declarations: [ProductsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(productsRoute),
     MatCardModule,
     MatFormFieldModule,
+    ReactiveFormsModule,
     MatInputModule,
     MatIconModule,
     MatButtonModule,
@@ -47,6 +48,6 @@ const productsRoute: Routes = [
     MatTabsModule,
     MatDialogModule
   ],
-  entryComponents: [AddProductDialogComponent]
+  entryComponents: []
 })
 export class ProductsModule {}

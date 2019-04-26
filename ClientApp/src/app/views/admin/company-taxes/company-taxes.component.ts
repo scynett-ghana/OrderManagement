@@ -1,5 +1,7 @@
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { AdminService } from './../admin.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import {
   MatDialog,
@@ -8,13 +10,7 @@ import {
   MatTableDataSource
 } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
-
-export interface TaxData {
-  taxId: number;
-  taxName: string;
-  taxRate: string;
-  taxSelect: boolean;
-}
+import { Taxes } from '../company.model';
 
 @Component({
   selector: 'app-company-taxes',
@@ -22,53 +18,71 @@ export interface TaxData {
   styleUrls: ['./company-taxes.component.scss']
 })
 export class CompanyTaxesComponent implements OnInit {
-  displayedColumns: string[] = ['taxName', 'taxRate', 'taxSelect', 'actions'];
+  actionButton = true;
 
-  dataSource: MatTableDataSource<TaxData>;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
-  taxLists: TaxData[] = [
+  taxStatus = [
     {
-      taxId: 1,
-      taxName: 'Vat',
-      taxRate: '1.20',
-      taxSelect: true
+      id: 1,
+      value: true
     },
     {
-      taxId: 2,
-      taxName: 'Tas',
-      taxRate: '1.90',
-      taxSelect: false
-    },
-    {
-      taxId: 3,
-      taxName: 'Tofill',
-      taxRate: '20',
-      taxSelect: true
-    },
-    {
-      taxId: 4,
-      taxName: 'Skell',
-      taxRate: '2',
-      taxSelect: true
-    },
-    {
-      taxId: 5,
-      taxName: 'Dwel',
-      taxRate: '50',
-      taxSelect: false
+      id: 2,
+      value: false
     }
   ];
 
-  constructor(private router: Router, private dialog: MatDialog) {
-    this.dataSource = new MatTableDataSource(this.taxLists);
+  displayedColumns: string[] = ['taxName', 'taxRate', 'taxSelect', 'actions'];
+
+  dataSource: MatTableDataSource<Taxes>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  taxLists: Taxes;
+  addTaxForm: FormGroup;
+  taxForm: Taxes;
+  taxId: '';
+  initialize: any;
+  taxData: Taxes;
+
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
+    private adminService: AdminService,
+    private formBuilder: FormBuilder,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.createTaxForm();
   }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.getTaxes();
+  }
+
+  createTaxForm(data?: Taxes) {
+    this.taxForm = new Taxes(data);
+    this.addTaxForm = this.formBuilder.group({
+      name: [this.taxForm.name],
+      rate: [this.taxForm.rate],
+      selected: [this.taxForm.selected]
+    });
+  }
+
+  getTaxes() {
+    this.adminService.viewTaxDetails().subscribe((result: any) => {
+      this.dataSource = new MatTableDataSource(result);
+      console.log(result);
+      this.taxLists = result;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
+
+  onSubmit() {
+    if (this.taxData.id) {
+      this.onUpdateTax();
+    } else {
+      this.onAddNewTax();
+    }
   }
 
   applyFilter(filterValue: string) {
@@ -79,8 +93,33 @@ export class CompanyTaxesComponent implements OnInit {
     }
   }
 
-  editTax(selectedTaxId: number) {
-    this.router.navigate(['/admin/taxes/' + selectedTaxId]);
+  onAddNewTax() {
+    this.adminService
+      .addTaxDetails(this.addTaxForm.value)
+      .subscribe((result: any) => {
+        this.getTaxes();
+        this.createTaxForm();
+      });
+  }
+
+  onUpdateTax() {
+    this.adminService
+      .updateTaxDetails(this.taxData.id, this.addTaxForm.value)
+      .subscribe((result: any) => {
+        this.getTaxes();
+      });
+  }
+
+  onCancel() {
+    this.actionButton = true;
+    this.createTaxForm();
+  }
+
+  editTax(selectedTaxData: Taxes) {
+    this.taxData = selectedTaxData;
+    console.log(selectedTaxData);
+    this.createTaxForm(selectedTaxData);
+    this.actionButton = false;
   }
 
   deleteTax(selectedTaxId: number): void {

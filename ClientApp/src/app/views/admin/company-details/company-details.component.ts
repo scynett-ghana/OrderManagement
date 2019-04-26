@@ -1,3 +1,4 @@
+import { AdminService } from './../admin.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./company-details.component.scss']
 })
 export class CompanyDetailsComponent implements OnInit {
-
-  constructor() { }
-
+  companyDetails = {};
+  constructor(private adminService: AdminService) {}
   ngOnInit() {
+    this.adminService.viewCompanyDetails().subscribe((result: any) => {
+      this.companyDetails = result[0];
+      console.log(this.companyDetails[0]);
+    });
   }
-
 }

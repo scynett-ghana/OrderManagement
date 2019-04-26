@@ -9,34 +9,41 @@ import { Form, FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./company-form.component.scss']
 })
 export class CompanyFormComponent implements OnInit {
-  company = new Company();
+  company: Company;
+  companyDetails: any = {};
   constructor(
     private formBuilder: FormBuilder,
-    private companyService: AdminService
+    private adminService: AdminService
   ) {}
   companyForm: FormGroup;
 
   ngOnInit() {
     this.createCompanyForm();
+    this.adminService.viewCompanyDetails().subscribe((result: any) => {
+      this.companyDetails = result;
+      this.createCompanyForm(this.companyDetails[0]);
+      console.log(this.companyDetails[0]);
+    });
   }
 
-  createCompanyForm() {
+  createCompanyForm(data?: Company) {
+    this.company = new Company(data);
     this.companyForm = this.formBuilder.group({
-      name: [this.company.companyName],
-      email: [this.company.companyEmail],
-      phone: [this.company.companyPhone],
-      town: [this.company.companyTown],
-      street: [this.company.companyStreet],
-      country: [this.company.companyCountry],
-      zip: [this.company.comapanyZip]
+      name: [this.company.name],
+      email: [this.company.email],
+      phone: [this.company.phone],
+      town: [this.company.town],
+      street: [this.company.street],
+      country: [this.company.country],
+      zip: [this.company.zip]
     });
   }
 
   onSubmit() {
-    this.companyService
-      .updateCompany(this.companyForm.value)
+    this.adminService
+      .updateCompanyDetails(this.companyForm.value)
       .subscribe((result: any) => {
-        console.log('Success');
+        console.log(result);
       });
   }
 }

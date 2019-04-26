@@ -1,6 +1,6 @@
 export class Customer {
   companyName: string;
-  id: string;
+  customerNumber: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -12,5 +12,5 @@ export class Customer {
   tourDays: [];
   // customPrice: string;
   // addInvoice: string;
-  comment: string;
+  comments: string;
 }

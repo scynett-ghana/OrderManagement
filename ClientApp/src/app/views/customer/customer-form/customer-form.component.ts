@@ -108,7 +108,7 @@ export class CustomerFormComponent implements OnInit {
   createCustomerForm() {
     this.customerForm = this.formBuilder.group({
       companyName: [this.customer.companyName],
-      number: [this.customer.id],
+      customerNumber: [this.customer.customerNumber],
       firstName: [this.customer.firstName],
       lastName: [this.customer.lastName],
       email: [this.customer.email],
@@ -118,7 +118,7 @@ export class CustomerFormComponent implements OnInit {
       country: [this.customer.country],
       zip: [this.customer.zip],
       tours: [this.customer.tourDays],
-      comment: [this.customer.comment]
+      comments: [this.customer.comments]
     });
   }
 
@@ -156,7 +156,7 @@ export class CustomerFormComponent implements OnInit {
     this.customerService
       .createCustomer(this.customerForm.value)
       .subscribe((result: any) => {
-        console.log('success');
+        console.log(result);
       });
   }
 }

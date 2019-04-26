@@ -27,7 +27,11 @@
               <div class="col-md-6">
                 <mat-form-field appearance="outline">
                   <mat-label>Customer Number</mat-label>
-                  <input matInput placeholder="" formControlName="number" />
+                  <input
+                    matInput
+                    placeholder=""
+                    formControlName="customerNumber"
+                  />
                 </mat-form-field>
               </div>
             </div>
@@ -102,7 +106,6 @@
                     <mat-option
                       *ngFor="let getTourDays of tourDaysList"
                       [value]="getTourDays"
-                      
                       >{{ getTourDays }}</mat-option
                     >
                   </mat-select>
@@ -293,7 +296,7 @@
                   <textarea
                     matInput
                     placeholder="Write a comment"
-                    formControlName="comment"
+                    formControlName="comments"
                   ></textarea>
                 </mat-form-field>
               </div>
@@ -301,7 +304,14 @@
           </div>
         </div>
         <div class="m-portlet__foot">
-          <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Save Details</button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            (click)="onSubmit()"
+          >
+            Save Details
+          </button>
           <button
             mat-raised-button
             color="warn"

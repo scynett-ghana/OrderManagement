@@ -7,7 +7,8 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class CustomerService {
-  customerEndPoint = environment.baseUrl + '/customer';
+  customerEndPoint = environment.baseUrl + 'customer';
+
   constructor(private httpClient: HttpClient) {}
 
   createCustomer(customerDetails: Customer) {
@@ -19,7 +20,7 @@ export class CustomerService {
   }
 
   getCustomerDetails(Id: number) {
-    return this.httpClient.get(this.customerEndPoint + Id);
+    return this.httpClient.get(this.customerEndPoint + '/' + Id);
   }
 
   updateCustomerDetails(Id: number) {

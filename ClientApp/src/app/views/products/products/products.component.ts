@@ -1,6 +1,7 @@
-import { AddProductDialogComponent } from './add-products-dialog.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Products } from '../products.model';
 
 import {
   MatDialog,
@@ -8,6 +9,7 @@ import {
   MatSort,
   MatTableDataSource
 } from '@angular/material';
+import { ProductsService } from '../products.service';
 
 export interface ProductData {
   productId: number;
@@ -55,12 +57,25 @@ export class ProductsComponent implements OnInit {
       pricePerKilo: '250'
     }
   ];
+  productForm: FormGroup;
+  product = new Products();
 
-  constructor(private router: Router, private dialog: MatDialog) {
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private productService: ProductsService
+  ) {
     this.dataSource = new MatTableDataSource(this.productLists);
   }
 
+  onSubmit() {
+    this.productService.addProduct(this.productForm.value).subscribe(result => {
+      console.log(result);
+    });
+  }
+
   ngOnInit() {
+    this.createProductForm();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -73,9 +88,10 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  addProduct(): void {
-    const dialogRef = this.dialog.open(AddProductDialogComponent, {
-      width: '500px'
+  createProductForm() {
+    this.productForm = this.formBuilder.group({
+      name: [this.product.name],
+      pricePerKilo: [this.product.pricePerKilo]
     });
   }
 }

@@ -51,7 +51,7 @@
                 Customer Name
               </th>
               <td mat-cell *matCellDef="let customerLists">
-                {{ customerLists.companyName }}
+                {{ customerLists.firstname }}
               </td>
               <td mat-footer-cell *matFooterCellDef>&nbsp;</td>
             </ng-container>
@@ -62,7 +62,7 @@
                 Owner Name
               </th>
               <td mat-cell *matCellDef="let customerLists">
-                {{ customerLists.ownerName }}
+                {{ customerLists.town }}
               </td>
               <td mat-footer-cell *matFooterCellDef>&nbsp;</td>
             </ng-container>
@@ -71,7 +71,7 @@
             <ng-container matColumnDef="address">
               <th mat-header-cell mat-sort-header *matHeaderCellDef>Address</th>
               <td mat-cell *matCellDef="let customerLists">
-                {{ customerLists.address }}
+                {{ customerLists.street }}
               </td>
               <td mat-footer-cell *matFooterCellDef>&nbsp;</td>
             </ng-container>
@@ -96,9 +96,7 @@
                 <mat-menu #menu="matMenu">
                   <button
                     mat-menu-item
-                    (click)="
-                      customerEditViewDetails('/view', customerLists.customerId)
-                    "
+                    (click)="customerEditViewDetails('/view', customerLists.id)"
                   >
                     <mat-icon>visibility</mat-icon>
                     <span>View Details</span>

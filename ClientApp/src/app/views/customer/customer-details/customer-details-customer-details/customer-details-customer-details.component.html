@@ -6,15 +6,17 @@
     </div>
     <div class=" row col-md-12 pb-3">
       <div class="col-md-2 customerInfo">Name</div>
-      <div class="col-md-2">John Doe</div>
+      <div class="col-md-2">
+        {{ customerDetails.firstname }} {{ customerDetails.lastname }}
+      </div>
     </div>
     <div class=" row col-md-12 pb-3">
       <div class="col-md-2 customerInfo">E-Mail</div>
-      <div class="col-md-2">mosesSuccess@gmail.com</div>
+      <div class="col-md-2">{{ customerDetails.email }}</div>
     </div>
     <div class="row col-md-12 pb-4">
       <div class="col-md-2 customerInfo">Phone</div>
-      <div class="col-md-2">02455443</div>
+      <div class="col-md-2">{{ customerDetails.phone }}</div>
     </div>
 
     <div class="col-md-12">
@@ -24,23 +26,23 @@
 
     <div class="row col-md-12 pb-3">
       <div class="col-md-2 customerInfo">Country</div>
-      <div class="col-md-2">Ghana</div>
+      <div class="col-md-2">{{ customerDetails.country }}</div>
     </div>
     <div class="row col-md-12 pb-3">
       <div class="col-md-2 customerInfo">Town</div>
-      <div class="col-md-2">Asaman Kese</div>
+      <div class="col-md-2">{{ customerDetails.town }}</div>
     </div>
     <div class="row col-md-12 pb-3">
       <div class="col-md-2 customerInfo">Street</div>
-      <div class="col-md-2">KT-990</div>
+      <div class="col-md-2">{{ customerDetails.street }}</div>
     </div>
     <div class="row col-md-12 pb-3">
       <div class="col-md-2 customerInfo">Zip</div>
-      <div class="col-md-2">455554</div>
+      <div class="col-md-2">{{ customerDetails.zip }}</div>
     </div>
     <div class="row col-md-12 pb-3">
       <div class="col-md-2 customerInfo">Tour Days</div>
-      <div class="col-md-2">Monday, Tuesday</div>
+      <div class="col-md-2">{{ customerDetails.tourDays }}</div>
     </div>
   </div>
 </div>
